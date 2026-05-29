@@ -20,7 +20,7 @@
       - Linux
 
 4. Architecture
-    ## 🏗 Architecture Flow
+    ##  Architecture Flow
 
  GitHub Push
      ↓
@@ -52,7 +52,7 @@ docker build -t devops-project .
 Run container:
 
 docker run -d -p 8080:80 devops-project
-## 🌐 Access Application
+##  Access Application
 
 Open browser:
 
@@ -85,7 +85,7 @@ http://http://54.227.127.235/
 - DevOps workflow automation
 
 10. Author Section
-  ## 👨‍💻 Author
+  ## Author
 
-Name: Your Name  
+Name: KOTIPALI HEMANTH
 GitHub: https://https://github.com/hemanthkotipalli
