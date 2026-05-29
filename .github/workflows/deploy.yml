@@ -12,17 +12,16 @@ jobs:
     steps:
 
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build Docker Image
         run: docker build -t devops-project .
 
       - name: Save Docker Image
-        run: docker save devops-project > devops-project.tar
+        run: docker save devops-project -o devops-project.tar
 
       - name: Copy Docker Image to EC2
         uses: appleboy/scp-action@master
-
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
@@ -32,20 +31,12 @@ jobs:
 
       - name: Deploy Application on EC2
         uses: appleboy/ssh-action@master
-
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
-
           script: |
-
-            docker load < devops-project.tar
-
+            docker load -i devops-project.tar
             docker stop devops-container || true
-
             docker rm devops-container || true
-
-            docker run -d -p 80:80 \
-            --name devops-container \
-            devops-project
+            docker run -d -p 80:80 --name devops-container devops-project
